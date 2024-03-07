@@ -13,22 +13,18 @@ Execução:
         ou
         ./hello.py
 """
-__version__ = "0.0.1"
+__version__ = "0.1.2"
 __author__ = " Dara Aragao"
 __license__ = "Unlicense"
 
 import os 
 
-current_language="pt_BR"
+current_language= os.getenv("LANG", "es_SP")[:5]
 
-#Essa parte está exibindo hello wold#
-msg="Hello, World"
-
-if current_language=="pt_BR":
-    msg="Olá, Mundo!"
-elif current_language=="it_IT":
-    msg="Ciao, Mondo!"
-elif current_language=="es_SP":
-    msg="Hola, Mundo!"
-        
-print(msg)
+msg = { 
+    "en_US": "Hello, World",
+    "pt_BR": "Olá, mundo!",
+    "es_SP": " Hola, Mundo!",       
+    }
+       
+print(msg[current_language])
