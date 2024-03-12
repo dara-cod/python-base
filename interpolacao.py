@@ -1,37 +1,28 @@
-In [17]: email_tmpl = """
-    ...: Ola %(iniciais)s
-    ...:
-    ...: Tem interesse em comprar %(produto)s?
-    ...:
-    ...: Este produto é ótimo para resolver
-    ...: %(texto)s
-    ...:
-    ...: Clique agora em %(link)s
-    ...:
-    ...: Apenas %(quantidade)d disponiveis!
-    ...:
-    ...: preço promocional %(preco).2f
-    ...: """
+email_tmpl = """
 
-In [18]: clientes = ["Darildes, "Lourdes", "Dega"]
-  Cell In[18], line 1
-    clientes = ["Darildes, "Lourdes", "Dega"]
-                                           ^
-SyntaxError: unterminated string literal (detected at line 1)
+Ola %(nome)s,
 
+Tem interesse em comprar %(produto)s?
 
-In [19]: clientes = ["Debora"]
+Este produto é ótimo para resolver %(texto)s.
 
-In [20]: for cliente in clientes:
-    ...:     print(
-    ...:         email_tmpl
-    ...:         %  {
-    ...:             "iniciais": cliente,
-    ...:             "produto": "caneta",
-    ...:             "texto": "Escrever muito bem.",
-    ...:             "link": "https://canetaslegais.com",
-    ...:             "quantidade": 1,
-    ...:             "preco": 50.6
-    ...:         }
-    ...:     )
-    ...:
+Clique agora em %(link)s.
+
+Apenas %(quantidade)d disponíveis!
+
+Preço promocional %(preco).2f.
+"""
+
+clientes = ["Rita", "Lourdes", "Paloma"]
+
+for cliente in clientes:
+    print(
+        email_tmpl % {
+            "nome": cliente,
+            "produto": "caneta",
+            "texto": "Escrever muito bem.",
+            "link": "https://canetaslegais.com",
+            "quantidade": 1,
+            "preco": 20.6
+        }
+    )
