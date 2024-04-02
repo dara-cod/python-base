@@ -30,11 +30,13 @@ __version__ = "0.1.0"
 
 import sys
 import os
+import logging
 
 from datetime import datetime
 
 arguments = sys.argv[1:]
 
+# Validacao
 if not arguments:
     operation = input("operacao:")
     n1 = input("n1:")
@@ -65,8 +67,12 @@ for num in nums:
         num = int(num)
     validated_nums.append(num)
 
-n1, n2 = validated_nums
-
+try: 
+    n1, n2 = validated_nums
+except ValueError as e:
+    print(str(e))
+    sys.exit(1)
+    
 # TODO: USAR UM DICIONARIO DE FUNÇÕES
 if operation == "sum":
     result = n1 + n2
@@ -77,12 +83,29 @@ elif operation == "mul":
 elif operation == "div":
     result = n1 / n2
 
-path = os.curdir
+path = "/"
 filepath = os.path.join(path, "prefixcalc.log")
 timestamp = datetime.now().isoformat()
 user = os.getenv('USER','anonymous')
 
-with open (filepath, "a") as file_:
-     file_.write(f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n")
-    
 print(f"O resultado é {result}")
+
+    log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("Dara", log_level)
+ch = logging.StreamHandler()
+ch.setLevel(log_level)
+fmt = logging.Formatter(
+    '%(asctime)s %(name)s %(levelname)s '
+    'l:%(lineno)d f:%(filename)s: %(message)s'
+)
+ch.setFormatter(fmt)
+log.addHandler(ch)
+
+try: 
+    with open(filepath, "a") as file_:
+        file_.write(f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n")
+except: PermissionError as e:
+    #TODO logging - VERIFICAR DEPOIS
+    
+    print(str(e))
+    sys.exit(1)
