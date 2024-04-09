@@ -29,20 +29,41 @@ if not arguments:
 if arguments [0] not in cmds:
     print(f"Invalid command {arguments[0]}")
     
-if arguments [0] == "read":
-    # leitura das notas
-    pass
+while True:
+    
+    if arguments [0] == "read":
+        try: 
+            arg_tag = arguments[1].lower()
+        except IndexError:
+            arg_tag = input("Qual a tag?").strip().lower()
+            
+        # leitura das notas
+        for line in open(filepath):
+            tittle, tag, text = line.split("\t")
+            if tag.lower() == arg_tag:
+                print(f"title: {tittle}")
+                print(f"text: {text}")
+                print("-" * 30)
+                print ()
 
-if arguments [0] == "new":
-    titulo = arguments [1] # TODO: tratar exception
-    text = [ 
-        f"{titulo}\n",
-        input("tag:").strip(),
-        input("text:\n").strip(),
-        "\n"   
-    ]
-    # \t - tsv 
-    with open (filepath, "a") as file_:
-        file_.write("\t".join(text))
+    if arguments [0] == "new":
+        try: 
+            title = arguments[1]
+        except IndexError:
+            title = input("qual é o titulo?"),strip().tittle()
+        
+        text = [ 
+            f"{title}\n",
+            input("tag:").strip(),
+            input("text:\n").strip(),
+            "\n"   
+        ]
+        # \t - tsv 
+        with open (filepath, "a") as file_:
+            file_.write("\t".join(text))
+            
+    cont = input("Quer continuar {arguments[0]} notas? [N/y]").strip().lower()
+    if cont != "y":
+        break
  
     

@@ -1,2 +1,9 @@
 Minha primeira nota
-	geral	essa � uma nota geral
+	geral	essa � uma nota geralMinha tarceira Nota
+	tech	golang	
+Minha tarceira Nota
+	fofo	fifi	
+Minha tarceira Nota
+	fasa	dsadsa	
+Minha tarceira Nota
+	meu post legal	vamos tetar	
